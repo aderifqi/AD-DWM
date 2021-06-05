@@ -1,0 +1,15 @@
+  actualfullscreen
+  anybar
+  attachabove
+  autostart
+  barpadding
+  bottomstack
+  center
+  config
+  fullgaps
+  pertag
+  spawn_dwm
+  statuscmd
+  statuscolors
+  systray
+  xrdb
