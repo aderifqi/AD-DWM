@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Reguler:size=9.5" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:style=Medium:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -19,7 +19,11 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
+
+// japang numirals
+// "〇" = 0
+static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -60,6 +64,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+#include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -95,6 +100,46 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
+		// Costum
+	{ MODKEY,                       XK_F7,       xrdb,           {.v = NULL } },
+	{ MODKEY,                        XK_e,      spawn,          SHCMD("/usr/bin/clipmenu")},
+	{ MODKEY|ShiftMask,              XK_e,      spawn,          SHCMD("clipdel -d '.' ")},
+	
+	{ MODKEY,                    XK_Print,      spawn,          SHCMD("/usr/bin/flameshot gui") },
+	{ MODKEY|ShiftMask,          XK_Print,      spawn,          SHCMD("/home/ad/.local/bin/capture") },
+
+	{ MODKEY|ShiftMask,              XK_w,      spawn,          SHCMD("/usr/bin/networkmanager_dmenu") },
+	{ 0,                         XK_Print,      spawn,          SHCMD("scrot %Y.%m.%d.%T-$wx$h.png --quality 100 -e 'mv $f /home/ad/Pictures/shots/' && dunstify  -r 90105 'Print screen'")},
+
+	{ MODKEY,                       XK_F8,      spawn,          SHCMD("/usr/bin/systemctl suspend") },
+	{ MODKEY,                        XK_a,      spawn,        	SHCMD("j4-dmenu-desktop --dmenu='rofi  -dmenu -i -p \"Run\" -lines 10 -width 600'" )},
+
+
+	{ MODKEY|ShiftMask,              XK_s,      spawn,          SHCMD("st -t 'st~' -g 75x20") },
+
+	{ MODKEY|ShiftMask,              XK_r,      spawn,          SHCMD("/home/ad/.local/bin/screencast" )},
+	{ MODKEY|ControlMask,            XK_q,      spawn,          SHCMD("/home/ad/.local/bin/powermenu" )},
+	{ MODKEY|ShiftMask,              XK_t,    	spawn,          SHCMD("/home/ad/.local/bin/tunnel_rofi" )},
+
+	// ---------  xf86 key  ------------
+
+	// custom key for general keyboard 
+	{ MODKEY|ShiftMask,            XK_F6,      		spawn,          SHCMD("brightnessctl s +10 ; pkill -RTMIN+18 ${STATUSBAR:-dwmblocks}" )},
+	{ MODKEY|ShiftMask,            XK_F5,       	spawn,          SHCMD("brightnessctl s 10- ; pkill -RTMIN+18 ${STATUSBAR:-dwmblocks}" )},
+	{ MODKEY|ShiftMask, 					 XK_F10,   			spawn,					SHCMD("pamixer -t; pkill -RTMIN+21 ${STATUSBAR:-dwmblocks}") },
+	{ MODKEY|ShiftMask,            XK_F12,      	spawn,          SHCMD("/home/ad/.local/bin/volKey +" )},
+	{ MODKEY|ShiftMask,            XK_F11,      	spawn,          SHCMD("/home/ad/.local/bin/volKey -" )},
+
+
+
+	// xf86 
+	{ 0,            XF86XK_MonBrightnessUp,      		spawn,          SHCMD("brightnessctl s +10 ; pkill -RTMIN+18 ${STATUSBAR:-dwmblocks}" )},
+	{ 0,            XF86XK_MonBrightnessDown,      	spawn,          SHCMD("brightnessctl s 10- ; pkill -RTMIN+18 ${STATUSBAR:-dwmblocks}" )},
+	{ 0, 						XF86XK_AudioMute, 			  			spawn,					SHCMD("pamixer -t; pkill -RTMIN+21 ${STATUSBAR:-dwmblocks}") },
+	{ 0,            XF86XK_AudioRaiseVolume,       	spawn,          SHCMD("/home/ad/.local/bin/volKey +" )},
+	{ 0,            XF86XK_AudioLowerVolume,       	spawn,          SHCMD("/home/ad/.local/bin/volKey -" )},
+
 };
 
 /* button definitions */
