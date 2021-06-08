@@ -32,15 +32,45 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
+	/* class													instance							title       tags mask   iscentered     isfloating   monitor */
+	{ "Gimp",														NULL,								NULL,              0,				0,							1,            -1 },
+	{ "PacketTracer7",			 "PacketTracer7",  	            NULL,         1 << 3,				1,							1,            -1 },
+	{ "firefox",												NULL,								NULL,         1 << 1,				0,							0,            -1 },
+	{ "Firefox Developer Edition",	 		NULL,								NULL,         1 << 1,				0,							0,            -1 },
+	{ "xdman",													NULL,								NULL,					1	<< 1,				0,							1,		 		  	-1 },	
+	{ "Eog",														NULL,								NULL,							 0,				0,							1,            -1 },
+	{ "File-roller",										NULL,								NULL,							 0,				0,							1,						-1 },
+	{ "Evince",													NULL,								NULL,							 0,				0,							1,						-1 },
+	{ "Nm-connection-editor",						NULL,								NULL,							 0,				0,							1,						-1 },
+	{ NULL,										 "libreoffice",	        			NULL,					1	<< 2,				0,							0,						-1 },
+	{ NULL,										          NULL,	            "WPS ",					1	<< 2,				0,							0,						-1 },
+	{ "TelegramDesktop",								NULL,								NULL,					1	<< 3,				0,							1,						-1 },
+	{ "Soffice",									 "soffice",								NULL,				       0,				0,							1,						 0 },
+	{ "Soffice",									 "soffice", 	  "Presenting: ",				       0,				0,							1,						 1 },
+	{ NULL,						 							    NULL,		  		 "ncmpcpp",				       0,				1,							1,					  -1 },
+	{ NULL,                  					  NULL,	      		"BpyTOP",		      1 << 7,				1,							1,					  -1 },
+	{ "Lxappearance",					"lxappearance",		  		      NULL,				       0,				1,							1,					  -1 },
+	{ NULL,			   											NULL,		    	"calcurse",							 0,				1,							1,					  -1 },
+	{ "Kamus",										   "kamus",		       		  NULL,							 0,				1,							1,					  -1 },
+	{ "Colorgrab",						   "colorgrab",   		 "ColorGrab",							 0,				1,							1,					  -1 },
+
+	{ "St",															"st", 						 "st~",							 0,				1,							1,					  -1 },
+
+	{ "Colorgrab",						   "colorgrab",   		 "ColorGrab",							 0,				1,							1,					  -1 },
+	{ "Lxappearance",					"lxappearance",		  		      NULL,				       0,				1,							1,					  -1 },
+	{ "TelegramDesktop",								NULL,								NULL,					1	<< 3,				0,							1,						-1 },
+	{ "FreeMind",									"FreeMind",   					 	NULL,							 0,				0,							1,					  -1 },
+	{ "Thunar",											"Thunar",   					 	NULL,							 0,				0,							1,					  -1 },
+	{ "Mail",									 "Thunderbird",     				 	NULL,					1 << 7,				0,							1,					  -1 },
+	{ "Keepnote",							  	"keepnote",   					 	NULL,							 0,				0,							1,					  -1 },
+	{ "KeePass2",							  	"keepass2",   					 	NULL,					1 << 7,				0,							1,					  -1 },
+	{ "Connman-gtk",					 "connman-gtk",   					 	NULL,							 0,				1,							1,					  -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -62,7 +92,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
