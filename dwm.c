@@ -158,7 +158,6 @@ typedef struct {
 	int realgap;
 	int gappx;
 } Gap;
-
 struct Monitor {
 	char ltsymbol[16];
 	float mfact;
@@ -548,10 +547,9 @@ buttonpress(XEvent *e)
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
-		} else if (ev->x < x + blw){
+    } else if (ev->x < x + blw)
 			click = ClkLtSymbol;
-    }
-    else if (ev->x > (x = selmon->ww - TEXTW(stext) - getsystraywidth() + lrpad)) {
+		else if (ev->x > (x = selmon->ww - TEXTW(stext) - getsystraywidth() + lrpad)) {
 			click = ClkStatusText;
 			click = ClkStatusText;
 			char *text = rawstext;
