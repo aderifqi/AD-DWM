@@ -228,11 +228,8 @@ static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
-<<<<<<< HEAD
 static void gap_copy(Gap *to, const Gap *from);
-=======
 static int getdwmblockspid();
->>>>>>> 70a13c5 (patch dwm-statuscmd-signal-6.2.diff)
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
