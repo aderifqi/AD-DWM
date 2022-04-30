@@ -145,12 +145,12 @@ static Key keys[] = {
 	{ MODKEY,                        XK_e,      spawn,          SHCMD("/usr/bin/clipmenu")},
 	{ MODKEY|ShiftMask,              XK_e,      spawn,          SHCMD("clipdel -d '.' ")},
 	
+	{ MODKEY|ShiftMask,              XK_p,      spawn,          SHCMD("/home/ad/.local/bin/screen_capture_rofi" )},
 	{ MODKEY,                    XK_Print,      spawn,          SHCMD("/usr/bin/flameshot gui") },
 	{ MODKEY|ShiftMask,          XK_Print,      spawn,          SHCMD("/home/ad/.local/bin/capture") },
-
-	{ MODKEY|ShiftMask,              XK_w,      spawn,          SHCMD("/usr/bin/networkmanager_dmenu") },
 	{ 0,                         XK_Print,      spawn,          SHCMD("scrot %Y.%m.%d.%T-$wx$h.png --quality 100 -e 'mv $f /home/ad/Pictures/shots/' && dunstify  -r 90105 'Print screen'")},
 
+	{ MODKEY|ShiftMask,              XK_w,      spawn,          SHCMD("/usr/bin/networkmanager_dmenu") },
 	{ MODKEY,                       XK_F8,      spawn,          SHCMD("/usr/bin/systemctl suspend") },
 	{ MODKEY,                        XK_a,      spawn,        	SHCMD("j4-dmenu-desktop --dmenu='rofi  -dmenu -i -p \"Run\" -lines 10 -width 600'" )},
 
