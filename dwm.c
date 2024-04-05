@@ -2274,12 +2274,6 @@ spawn(const Arg *arg)
 	}
 }
 
-void
-spawnbar()
-{
-	if (*altbarcmd)
-		system(altbarcmd);
-}
 
 void
 spawnbar()
