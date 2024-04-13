@@ -8,13 +8,13 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static const int showsystray        = 0;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
 static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *alttrayname      = "tray";    /* Polybar tray instance name */
-static const char *altbarcmd        = "$HOME/bar.sh"; /* Alternate bar launch command */
+static const char *altbarcmd        = "/home/ad/.config/polybar/bar"; /* Alternate bar launch command */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Reguler:size=9.5" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font:style=Medium:size=10";
 static char normbgcolor[]           = "#222222";
@@ -162,7 +162,8 @@ static Key keys[] = {
 
 	{ MODKEY|ShiftMask,              XK_w,      spawn,          SHCMD("/usr/bin/networkmanager_dmenu") },
 	{ MODKEY,                       XK_F8,      spawn,          SHCMD("/usr/bin/systemctl suspend") },
-	{ MODKEY,                        XK_a,      spawn,        	SHCMD("j4-dmenu-desktop --dmenu='rofi  -dmenu -i -p \"Run\" -lines 10 -width 600'" )},
+	// { MODKEY,                        XK_a,      spawn,        	SHCMD("j4-dmenu-desktop --dmenu='rofi  -dmenu -i -p \"Run\" -lines 10 -width 600'" )},
+	{ MODKEY,                        XK_a,      spawn,        	SHCMD("rofi -show drun -theme '/home/ad/.config/bspwm/scripts/launcher/style.rasi'" )},
 
 
 	{ MODKEY|ShiftMask,              XK_s,      spawn,          SHCMD("st -t 'st~' -g 75x20") },
