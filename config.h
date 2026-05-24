@@ -162,7 +162,7 @@ static Key keys[] = {
 	{ MODKEY,                    XK_Print,      spawn,          SHCMD("/usr/bin/flameshot gui") },
   { MODKEY,                        XK_c,      spawn,          SHCMD("/home/ad/.config/bspwm/scripts/colorpicker") },
 	{ MODKEY,                       XK_F8,      spawn,          SHCMD("/usr/bin/systemctl suspend") },
-	{ MODKEY,                        XK_a,      spawn,        	SHCMD("j4-dmenu-desktop --dmenu='rofi  -dmenu -i -p \"Run\" -lines 10 -width 600'" )},
+	{ MODKEY,                        XK_a,      spawn,        	SHCMD("j4-dmenu-desktop --dmenu='rofi -dmenu -i -p \"Run\" -theme /home/ad/.config/rofi/clipmenu.rasi'" )},
 	// { MODKEY,                        XK_a,      spawn,        	SHCMD("rofi -show drun -theme '/home/ad/.config/bspwm/scripts/launcher/style.rasi'" )},
 	{ MODKEY,                        XK_w,      spawn,          SHCMD("/usr/bin/feh -z --no-fehbg --bg-fill /home/ad/Pictures/Wallpapers/active") },
 
