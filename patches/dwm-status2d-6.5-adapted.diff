@@ -1,8 +1,16 @@
 diff --git a/dwm.c b/dwm.c
-index 9972d83..e96a94c 100644
+index 9972d83..7379a85 100644
 --- a/dwm.c
 +++ b/dwm.c
-@@ -241,6 +241,7 @@ static void detachstack(Client *c);
+@@ -233,7 +233,6 @@ static void clientmessage(XEvent *e);
+ static void configure(Client *c);
+ static void configurenotify(XEvent *e);
+ static void configurerequest(XEvent *e);
+-static void copyvalidchars(char *text, char *rawtext);
+ static Monitor *createmon(void);
+ static void destroynotify(XEvent *e);
+ static void detach(Client *c);
+@@ -241,6 +240,7 @@ static void detachstack(Client *c);
  static Monitor *dirtomon(int dir);
  static void drawbar(Monitor *m);
  static void drawbars(void);
@@ -10,7 +18,7 @@ index 9972d83..e96a94c 100644
  static void enternotify(XEvent *e);
  static void expose(XEvent *e);
  static void focus(Client *c);
-@@ -301,6 +302,7 @@ static void showhide(Client *c);
+@@ -301,6 +301,7 @@ static void showhide(Client *c);
  static void sigchld(int unused);
  static void sigdwmblocks(const Arg *arg);
  static void spawn(const Arg *arg);
@@ -18,7 +26,7 @@ index 9972d83..e96a94c 100644
  static Monitor *systraytomon(Monitor *m);
  static void spawnbar();
  static void tag(const Arg *arg);
-@@ -347,8 +349,8 @@ static Systray *systray =  NULL;
+@@ -347,8 +348,8 @@ static Systray *systray =  NULL;
  static const char broken[] = "broken";
  static const char dwmdir[] = "dwm";
  static const char localshare[] = ".local/share";
@@ -29,7 +37,7 @@ index 9972d83..e96a94c 100644
  static int dwmblockssig;
  pid_t dwmblockspid = 0;
  static int screen;
-@@ -590,7 +592,7 @@ buttonpress(XEvent *e)
+@@ -590,7 +591,7 @@ buttonpress(XEvent *e)
  			arg.ui = 1 << i;
  		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
  			click = ClkLtSymbol;
@@ -38,7 +46,7 @@ index 9972d83..e96a94c 100644
  			click = ClkStatusText;
  			click = ClkStatusText;
  			char *text = rawstext;
-@@ -657,7 +659,7 @@ cleanup(void)
+@@ -657,7 +658,7 @@ cleanup(void)
  	}
  	for (i = 0; i < CurLast; i++)
  		drw_cur_free(drw, cursor[i]);
@@ -47,7 +55,27 @@ index 9972d83..e96a94c 100644
  		free(scheme[i]);
  	free(scheme);
  	XDestroyWindow(dpy, wmcheckwin);
-@@ -963,6 +965,117 @@ dirtomon(int dir)
+@@ -857,19 +858,6 @@ configurerequest(XEvent *e)
+ 	XSync(dpy, False);
+ }
+ 
+-void
+-copyvalidchars(char *text, char *rawtext)
+-{
+-	int i = -1, j = 0;
+-
+-	while(rawtext[++i]) {
+-		if ((unsigned char)rawtext[i] >= ' ') {
+-			text[j++] = rawtext[i];
+-		}
+-	}
+-	text[j] = '\0';
+-}
+-
+ Monitor *
+ createmon(void)
+ {
+@@ -963,6 +951,117 @@ dirtomon(int dir)
  	return m;
  }
  
@@ -165,7 +193,7 @@ index 9972d83..e96a94c 100644
  void
  drawbar(Monitor *m)
  {
-@@ -980,9 +1093,7 @@ drawbar(Monitor *m)
+@@ -980,9 +1079,7 @@ drawbar(Monitor *m)
  
  	/* draw status first so it can be overdrawn by tags later */
  	if (m == selmon) { /* status is only drawn on selected monitor */
@@ -176,7 +204,7 @@ index 9972d83..e96a94c 100644
  	}
  
  	resizebarwin(m);
-@@ -2224,7 +2335,8 @@ setup(void)
+@@ -2224,7 +2321,8 @@ setup(void)
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
  	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
  	/* init appearance */
@@ -186,7 +214,17 @@ index 9972d83..e96a94c 100644
  	for (i = 0; i < LENGTH(colors); i++)
  		scheme[i] = drw_scm_create(drw, colors[i], 3);
  	/* init system tray */
-@@ -3177,6 +3289,7 @@ xrdb(const Arg *arg)
+@@ -2848,7 +2946,8 @@ updatestatus(void)
+ 	if (!gettextprop(root, XA_WM_NAME, rawstext, sizeof(rawstext)))
+ 		strcpy(stext, "dwm-"VERSION);
+ 	else
+-		copyvalidchars(stext, rawstext);
++		strncpy(stext, rawstext, sizeof(stext) - 1);
++	stext[sizeof(stext) - 1] = '\0';
+ 	drawbar(selmon);
+ 	updatesystray();
+ }
+@@ -3177,6 +3276,7 @@ xrdb(const Arg *arg)
  {
    loadxrdb();
    int i;

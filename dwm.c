@@ -233,7 +233,6 @@ static void clientmessage(XEvent *e);
 static void configure(Client *c);
 static void configurenotify(XEvent *e);
 static void configurerequest(XEvent *e);
-static void copyvalidchars(char *text, char *rawtext);
 static Monitor *createmon(void);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
@@ -857,19 +856,6 @@ configurerequest(XEvent *e)
 		XConfigureWindow(dpy, ev->window, ev->value_mask, &wc);
 	}
 	XSync(dpy, False);
-}
-
-void
-copyvalidchars(char *text, char *rawtext)
-{
-	int i = -1, j = 0;
-
-	while(rawtext[++i]) {
-		if ((unsigned char)rawtext[i] >= ' ') {
-			text[j++] = rawtext[i];
-		}
-	}
-	text[j] = '\0';
 }
 
 Monitor *
@@ -2960,7 +2946,8 @@ updatestatus(void)
 	if (!gettextprop(root, XA_WM_NAME, rawstext, sizeof(rawstext)))
 		strcpy(stext, "dwm-"VERSION);
 	else
-		copyvalidchars(stext, rawstext);
+		strncpy(stext, rawstext, sizeof(stext) - 1);
+	stext[sizeof(stext) - 1] = '\0';
 	drawbar(selmon);
 	updatesystray();
 }
